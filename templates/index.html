@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    {#    利用jquery来完成form上传等#}
+    <script src="http://tinymce.cachefly.net/4.3/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+
+            selector: '#my_editor',
+
+            plugins: ["image", "code"],
+
+            file_browser_callback: function (field_name, url, type, win) {
+
+                if (type == 'image') $('#my_form input').click();
+
+            }
+
+        });
+    </script>
+
+    <title>Test</title>
+
+</head>
+
+<body>
+
+<textarea id="my_editor" rows="50"></textarea>
+
+<iframe id="form_target" name="form_target" style="display:none"></iframe>
+
+<form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data"
+      style="width:0px;height:0;overflow:hidden">
+
+    <input name="image" type="file" onchange="$('#my_form').submit();this.value='';">
+
+</form>
+
+</body>
+
+</html>
